@@ -1,0 +1,147 @@
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+:root {
+  --hue: 200;
+  --saturation: 50%;
+  --foreground-color: hsl(var(--hue), var(--saturation), 75%);
+  --background-color: hsl(var(--hue), var(--saturation), 20%);
+}
+
+body {
+  margin: 0;
+  background-color: var(--background-color);
+  overflow: hidden;
+  font-family: "Press Start 2P", cursive;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  margin: 10px auto;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--foreground-color);
+  font-size: 2rem;
+  font-weight: bolder;
+  visibility: hidden;
+  padding: 10px;
+}
+
+.restart-button {
+  margin: 10px;
+  padding: 10px;
+  background-color: transparent;
+  font-family: inherit;
+  border: 4px dotted;
+  cursor: pointer;
+  visibility: inherit;
+  transition: 0.4s all;
+}
+.restart-button:hover {
+  background-color: red;
+  border: 5px dotted;
+}
+
+.paddle {
+  /* Defining a position variable that will be altered later 
+    using Javascript */
+  --position: 50;
+
+  position: absolute;
+  top: calc(var(--position) * 1vh);
+  /* background-color: var(--foreground-color); */
+
+  width: 2vh;
+  height: 10vh;
+  /* Way to center our paddle by translating
+   it upwards by 50% its value */
+  transform: translateY(-50%);
+}
+
+.vl {
+  border-left: 6px dotted white;
+  height: 100vh;
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  top: 0;
+}
+
+.paddle.left {
+  left: 1vw;
+  background-color: hsl(var(--hue), 100%, 40%);
+}
+
+.paddle.right {
+  right: 1vw;
+  background-color: hsl(var(--hue), var(--saturation), 60%);
+}
+
+.ball {
+  /* Defining a position variable that will be altered later 
+    using Javascript */
+  --x: 50;
+  --y: 50;
+
+  position: absolute;
+  background-color: var(--foreground-color);
+  left: calc(var(--x) * 1vw);
+  top: calc(var(--y) * 1vh);
+  transform: translate(-50%, -50%);
+  width: 2.5vh;
+  height: 2.5vh;
+  border-radius: 50%;
+}
+
+.score {
+  display: flex;
+  justify-content: center;
+  font-weight: bolder;
+  font-size: 7vh;
+  color: var(--foreground-color);
+}
+
+/* score > * assigns properties to all direct children of 
+score block */
+/* Here flex grow 1 ensures 50% coverage of screen by
+ both score blocks */
+/* flex basis 0 ensures that any larger number in any
+ block will not impact size of the other block. It will 
+ increase or decrease in its own space from left-most point */
+.score > * {
+  flex-grow: 1;
+  flex-basis: 0;
+  padding: 0 2vh;
+  margin: 1vh 0;
+  opacity: 0.6;
+}
+
+/*we ensure that score of first block is aligned towards right
+and flex basis 0 we did before ensures that increase in number
+wont impact size of other block  */
+.score > :first-child {
+  text-align: right;
+  border-right: 0.5vh solid var(--foreground-color);
+}
+
+/* .play-pause {
+  position: absolute;
+  bottom: 1vh;
+  left: 50vw;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  color: var(--foreground-color);
+  padding: 5px;
+  border: 2px solid;
+  cursor: pointer;
+  transition: 0.2s all;
+} */
+
+.play-pause:hover {
+  background-color: var(--foreground-color);
+  color: var(--background-color);
+}
